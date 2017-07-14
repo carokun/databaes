@@ -11,6 +11,8 @@
     "react": "16.0.0-alpha.12",
     "react-native": "0.46.2",
     "react-native-simple-radio-button": "^2.5.0-alpha.1",
+    "react-native-swipe-cards": "^0.1.0",
+    "react-native-typewriter": "^0.5.1",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
     "redux": "^3.7.2",

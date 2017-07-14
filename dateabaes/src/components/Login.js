@@ -13,6 +13,11 @@ class Login extends Component {
   alert() {
     alert("Roses are #f00, Violets are #00f, show me your bar and I'll give you my foo.")
   }
+
+  loginButtonPress(username, password) {
+    this.props.loginUser(username, password);
+    this.props.navigation.navigate('SwipeScreen');
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -36,11 +41,12 @@ class Login extends Component {
             autoCapitalize="none" secureTextEntry={true} placeholder="~important!" style={styles.textInputG}
             editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#F1A227'}/>
         <View style={styles.btnContainer}>
-          <TouchableOpacity style={styles.btnRegister}>
+          <TouchableOpacity style={styles.btnRegister}
+            onPress={() => this.props.navigation.navigate('RegisterQuizHome')}>
             <Text style={styles.btnTextLight}>R391s73R</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnLogin}
-            onPress={() => this.props.loginUser(this.props.username, this.props.password)}>
+            onPress={() => this.loginButtonPress(this.props.username, this.props.password)}>
             <Text style={styles.btnTextDark}>L091n</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnTroll} onPress={this.alert}>
