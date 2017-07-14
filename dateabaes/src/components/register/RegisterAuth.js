@@ -1,65 +1,69 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Picker, Slider, TouchableOpacity, TextInput } from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+import React from 'react';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import styles from '../../../public/css/styles.js';
+import { connect } from 'react-redux';
+import firebase from 'firebase'
 
-class RegisterAuth extends Component {
-  click(a) {
-    alert(a);
-  }
+import { registerUser, usernameChange, passwordChange, fnameChange, lnameChange } from '../../actions/RegisterActions'
+
+class RegisterAuth extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-      <Text style={styles.questionText}>
-        Programming language of choice:</Text>
-        <Text style={styles.subtext}>
-          What's your love language?</Text>
-        <RadioForm
-          radio_props={[
-            {label: 'JavaScript', value: 2 },
-            {label: 'Python', value: 5 },
-            {label: 'Ruby', value: 7},
-          ]}
-          initial={0}
-          formHorizontal={true}
-          onPress={(value) => {this.click(value)}}
-          buttonColor={'#F1A227'}
-          labelColor={'#fff'}
-          style={{paddingTop: 15, marginLeft: 20}}
-        />
-        <Text style={styles.questionText}>
-          Frontend or Backend?</Text>
-        <Text style={styles.subtext}>
-          If you know what I mean... ;)</Text>
-          <RadioForm
-            radio_props={[
-              {label: 'Frontend', value: 5 },
-              {label: 'Backend', value: 5 },
-            ]}
-            initial={0}
-            formHorizontal={true}
-            onPress={(value) => {this.click(value)}}
-            buttonColor={'#F1A227'}
-            labelColor={'#fff'}
-            style={{paddingTop: 15, marginLeft: 20}}
-          />
-          <Text style={styles.questionText}>
-            Years of experience:</Text>
-          <Text style={styles.subtext}>
-            We like those who are good at what they do.</Text>
-          <Slider style={styles.slider} maximumValue={15} minimumValue={1}
-          minimumTrackTintColor={'#F1A227'} step={1} /*value={}*//>
-          {/* Text here below should be the number the person slides (reference state) */}
-          <Text style={styles.subtext}>10</Text>
-          <TouchableOpacity style={styles.whiteBtn}>
-            <Text style={styles.btnTextLight}>Next</Text>
-          </TouchableOpacity>
+      <Text style={styles.questionText1}>
+        Github Username</Text>
+      <TextInput blurOnSubmit={true}
+      onChangeText={(username) => this.props.usernameChange(username)}
+      maxLength={15} placeholder="~username" style={styles.textInput}
+      editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
+
+      <Text style={styles.questionText1}>
+        Password</Text>
+      <TextInput blurOnSubmit={true}
+      onChangeText={(password) => this.props.passwordChange(password)}
+      maxLength={15} secureTextEntry={true} placeholder="~bonus points of you use ASCII" style={styles.textInput}
+      editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
+
+      <Text style={styles.questionText1}>
+        First Name</Text>
+      <TextInput blurOnSubmit={true}
+      onChangeText={(fname) => this.props.fnameChange(fname)}
+      maxLength={15} style={styles.textInput}
+      editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
+
+      <Text style={styles.questionText1}>
+        Last Name</Text>
+      <TextInput blurOnSubmit={true}
+      onChangeText={(lname) => this.props.lnameChange(lname)}
+      maxLength={15} style={styles.textInput}
+      editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
+
+      <TouchableOpacity style={styles.whiteBtn} onPress={() => this.props.registerUser(this.props.username, this.props.password, this.props.fname, this.props.lname)}>
+        <Text style={styles.btnTextLight}>Next</Text>
+      </TouchableOpacity>
       </View>
-    )
+    );
   }
-}
+};
 
+const mapStateToProps = (state) => {
+  return {
+    username: state.register.username,
+    password: state.register.password,
+    fname: state.register.fname,
+    lname: state.register.lname
+  }
+};
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    registerUser: (username, password, fname, lname) => dispatch(registerUser(dispatch, username, password, fname, lname)),
+    usernameChange: (username) => usernameChange(dispatch, username),
+    passwordChange: (password) => passwordChange(dispatch, password),
+    fnameChange: (fname) => fnameChange(dispatch, fname),
+    lnameChange: (lname) => lnameChange(dispatch, lname)
+  }
+};
 
-export default RegisterAuth;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterAuth);

@@ -45,6 +45,7 @@ export default StyleSheet.create({
       },
       textInput: {
         color: 'white',
+        paddingLeft: 10,
         height: 30,
         borderStyle: 'solid',
         borderColor: '#F1A227',
@@ -61,7 +62,7 @@ export default StyleSheet.create({
         color: '#F1A227',
         fontSize: 15,
         textAlign: 'left',
-        marginLeft: 40,
+        marginLeft: 45,
         marginTop: 15
       },
       loginBtn: {
@@ -73,5 +74,92 @@ export default StyleSheet.create({
         borderRadius: 3,
         justifyContent: 'center',
         alignItems: 'center',
-      }
+      },
+      logo: {
+        marginLeft: '18%',
+        height: 24,
+        width: 248
+      },
+      taglineContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+      },
+      taglineW: {
+        marginTop: 10,
+        marginBottom: 20,
+        textAlign: 'center',
+        fontFamily: 'Courier',
+        fontSize: 20,
+        color: '#EEEEEE',
+      },
+      taglineP: {
+        marginTop: 10,
+        marginBottom: 20,
+        textAlign: 'center',
+        fontFamily: 'Courier',
+        fontSize: 20,
+        color: '#AC44D8',
+      },
+      textInputG: {
+        color: 'white',
+        paddingLeft: 10,
+        height: 30,
+        borderStyle: 'solid',
+        borderColor: '#56C100',
+        borderRadius: 3,
+        borderWidth: 1,
+        marginLeft: 40,
+        marginRight: 40,
+        fontFamily: 'Courier',
+        fontSize: 12,
+        marginTop: 10
+      },
+      questionText1: {
+        fontFamily: 'Courier',
+        color: '#56C100',
+        fontSize: 15,
+        textAlign: 'left',
+        marginLeft: 45,
+        marginTop: 15
+      },
+      btnContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+      },
+      btnLogin: {
+        width: 80,
+        height: 30,
+        backgroundColor: '#F1A227',
+        marginTop: 20,
+        marginRight: 15,
+        borderRadius: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      btnTextDark: {
+        fontFamily: 'Courier',
+        fontSize: 15,
+        color: '#fff'
+      },
+      btnRegister: {
+        width: 100,
+        height: 30,
+        backgroundColor: '#EEEEEE',
+        marginTop: 20,
+        marginRight: 15,
+        marginLeft: 15,
+        borderRadius: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      btnTroll: {
+        width: 80,
+        height: 30,
+        backgroundColor: '#FC0044',
+        marginTop: 20,
+        marginRight: 15,
+        borderRadius: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
     });
