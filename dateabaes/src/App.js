@@ -14,7 +14,7 @@ import RegisterQuizQuestion from './components/register/RegisterQuizQuestion';
 import Matches from './components/main/Matches';
 import Messages from './components/main/Messages';
 import SwipeScreen from './components/main/SwipeScreen';
-import SwipeScreenTest from './components/main/SwipeScreenTest';
+import RegisterEndQuiz from './components/register/RegisterEndQuiz';
 
 class App extends Component {
 
@@ -90,7 +90,13 @@ const Navigator = StackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  RegisterEndQuiz: {
+    screen: RegisterEndQuiz,
+    navigationOptions: {
+      header: null
+    }
   }
-}, {initialRouteName: 'RegisterQuizQuestion'});
+}, {initialRouteName: 'Login'});
 
 export default App;

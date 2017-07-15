@@ -1,27 +1,18 @@
 import firebase from 'firebase';
 
 export const registerUser = (dispatch, username, password, fname, lname, language, end, gender, years, skillScore, nerdyScore) => {
-  console.log('here');
   return (dispatch) => {
-    console.log('here2');
     firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
     .then((user) => {
       const { currentUser } = firebase.auth();
-      firebase.database().ref(`users/${currentUser.uid}/user`)
-        .push({ [username]: {password, fname, lname, language, end, gender, years, skillScore, nerdyScore} })
+      firebase.database().ref(`users/${currentUser.uid}/${username}`)
+        .set({password, fname, lname, language, end, gender, years, skillScore, nerdyScore, likes: 'none', dislikes: 'none', matches: 'none'})
         .then(() => {
           console.log('success');
           dispatch({
             type: 'register_user',
-            language,
-            end,
-            gender,
-            years,
-            skillScore,
-            nerdyScore
           })
         })
-      console.log(currentUser);
     })
     .catch((err) => {
       console.log(err);

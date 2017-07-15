@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import style from '../../../public/css/styles.js';
+import { connect } from 'react-redux';
 
 import SwipeCards from 'react-native-swipe-cards';
+import { getUsers, swipeYes, swipeNo } from '../../actions/MainActions';
 
 let Card = React.createClass({
   render() {
@@ -56,27 +58,40 @@ const Cards = [
   {username: 'tifchang', fname: 'Tiffany', lname: 'Chang', language: 'OCaml', gender: 'gal', years: '2', nerdyScore: '9', skillScore: '2', end: 'frontend'}
 ]
 
-export default React.createClass({
-  getInitialState() {
-    return {
-      cards: Cards
+class SwipeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      cards: []
     }
-  },
+  }
+
+  // componentWillMount() {
+  //   this.props.getUsers(this.props.username, this.props.password);
+  // }
+
+  componentDidMount() {
+    const users = [];
+    for (var key in this.props.users) {
+      users.push(Object.assign({}, this.props.users[key], {username: key}))
+    }
+    this.setState({cards: users})
+  }
+
   handleYup (card) {
-    console.log(`Yup for ${card.text}`)
-  },
+    this.props.swipeYes(card.username, this.props.username)
+    console.log(`Yup for ${card.username}`)
+  }
   handleNope (card) {
-    console.log(`Nope for ${card.text}`)
-  },
-  handleMaybe (card) {
-    console.log(`Maybe for ${card.text}`)
-  },
+    this.props.swipeNo(card.username, this.props.username)
+    console.log(`Nope for ${card.username}`)
+  }
   render() {
     // If you want a stack of cards instead of one-per-one view, activate stack mode
     // stack={true}
     return (
       <View style={{flex: 1,backgroundColor: '#1F1F1F',justifyContent: 'center'}}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Matches')}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={[styles.baeList]}>my baeList</Text>
               <Image
@@ -91,15 +106,13 @@ export default React.createClass({
           renderCard={(cardData) => <Card {...cardData} />}
           renderNoMoreCards={() => <NoMoreCards />}
 
-         handleYup={this.handleYup}
-          handleNope={this.handleNope}
-          handleMaybe={this.handleMaybe}
-          hasMaybeAction
+          handleYup={(card) => this.handleYup(card)}
+          handleNope={(card) => this.handleNope(card)}
         />
       </View>
     )
   }
-})
+}
 
 const styles = StyleSheet.create({
   card: {
@@ -161,3 +174,21 @@ const styles = StyleSheet.create({
     marginTop: 40,
   }
 })
+
+const mapStateToProps = (state) => {
+  return {
+    username: state.login.username,
+    password: state.login.password,
+    users: state.main.users
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUsers: (username, password, setUsers) => dispatch(getUsers(dispatch, username, password, setUsers)),
+    swipeYes: (username, liker) => dispatch(swipeYes(dispatch, username, liker)),
+    swipeNo: (username, disliker) => dispatch(swipeNo(dispatch, username, disliker))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SwipeScreen);

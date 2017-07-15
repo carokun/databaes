@@ -11,7 +11,7 @@ export default StyleSheet.create({
         color: '#F1A227',
         fontSize: 15,
         textAlign: 'left',
-        marginLeft: 20,
+        marginLeft: 30,
         marginTop: 15
       },
       subtext: {
@@ -180,7 +180,7 @@ export default StyleSheet.create({
         backgroundColor: '#00B2F8',
         marginTop: 20,
         marginRight: 15,
-        marginLeft: 15,
+        marginLeft: '23%',
         borderRadius: 3,
         justifyContent: 'center',
         alignItems: 'center',
@@ -193,5 +193,53 @@ export default StyleSheet.create({
         margin: 50,
         height: 166,
         width: 213
+      },
+      regQText: {
+        fontFamily: 'Courier',
+        color: '#fff',
+        fontSize: 15,
+        marginTop: 15
+      },
+      largeHeader: {
+        fontSize: 30,
+        textAlign: 'center',
+        color: '#fff',
+        fontFamily: 'Courier'
+      },
+      baeList: {
+        color: '#EEEEEE',
+        fontFamily: 'Courier',
+        fontSize: 20,
+        marginTop: 40,
+        marginLeft: '15%'
+      },
+      heart: {
+        marginLeft: 5,
+        height: 50,
+        width: 50,
+        marginTop: 40,
+      },
+      matchCard: {
+        height: 60,
+        width: "100%",
+        backgroundColor: '#1F1F1F',
+        alignItems: 'center',
+        flexDirection: 'row'
+      },
+      matchName: {
+        fontFamily: 'Courier',
+        color: '#fff',
+        fontSize: 17,
+        marginLeft: 40,
+        width: 200
+      },
+      sendPickupModal: {
+        width: 70,
+        height: 30,
+        backgroundColor: '#FC0044',
+        borderRadius: 3,
+        marginLeft: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
       }
     });

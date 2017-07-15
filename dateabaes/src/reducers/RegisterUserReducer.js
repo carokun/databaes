@@ -17,7 +17,7 @@ export default (state = INITIAL_STATE, action) =>
 {
   switch (action.type) {
     case 'register_user':
-      return state;
+      return INITIAL_STATE;
     case 'username_change':
       return Object.assign({}, state, { username: action.username });
     case 'password_change':

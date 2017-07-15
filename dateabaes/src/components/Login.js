@@ -4,7 +4,7 @@ import styles from '../../public/css/styles.js';
 import { connect } from 'react-redux';
 
 import { loginUser, usernameChange, passwordChange } from '../actions/LoginActions'
-
+import { getMatches } from '../actions/MainActions';
 
 class Login extends Component {
   click(a) {
@@ -15,8 +15,7 @@ class Login extends Component {
   }
 
   loginButtonPress(username, password) {
-    this.props.loginUser(username, password);
-    this.props.navigation.navigate('SwipeScreen');
+    this.props.getMatches(username, password, () => this.props.loginUser(username, password, this.props.navigation));
   }
   render() {
     return (
@@ -32,11 +31,13 @@ class Login extends Component {
         </View>
         <Text style={styles.questionText1}>Username</Text>
           <TextInput blurOnSubmit={true}
+            value={this.props.username}
             onChangeText={(username) => this.props.usernameChange(username)}
             autoCapitalize="none" maxLength={20} placeholder="~plz use real github username" style={styles.textInputG}
             editable={true} placeholderTextColor={'#9B9B9B'} keyboardAppearance='dark' selectionColor={'#F1A227'}/>
         <Text style={styles.questionText1}>Password</Text>
           <TextInput blurOnSubmit={true}
+            value={this.props.password}
             onChangeText={(password) => this.props.passwordChange(password)}
             autoCapitalize="none" secureTextEntry={true} placeholder="~important!" style={styles.textInputG}
             editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#F1A227'}/>
@@ -67,7 +68,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (username, password) => dispatch(loginUser(dispatch, username, password)),
+    loginUser: (username, password, navigation) => dispatch(loginUser(dispatch, username, password, navigation)),
+    getMatches: (username, password, loginUser) => dispatch(getMatches(dispatch, username, password, loginUser)),
     usernameChange: (username) => usernameChange(dispatch, username),
     passwordChange: (password) => passwordChange(dispatch, password)
   }
