@@ -32,7 +32,7 @@ class RegisterQuizQuestion extends Component {
         <Text style={styles.regQText}>{questions[this.props.skillScore]}</Text>
         <TextInput blurOnSubmit={true}
           onChangeText={(guessedAnswer) => this.props.answerChanged(guessedAnswer)}
-          autoCapitalize="none" autoCorrect="none" placeholder="~YOUR_ANSWER" style={styles.textInputG}
+          autoCapitalize="none" autoCorrect={false} placeholder="~YOUR_ANSWER" style={styles.textInputG}
           editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#F1A227'}
         />
         <TouchableOpacity style={styles.whiteBtn}

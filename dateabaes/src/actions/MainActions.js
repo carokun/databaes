@@ -45,7 +45,11 @@ export const findMatches = (dispatch, username, likes, matches, users, navigatio
             // console.log(data[key][Object.keys(data[key])[0]].password);
             console.log(likes);
             console.log(users[key].likes);
-            if (likes.hasOwnProperty(key) && users[key].likes.hasOwnProperty(username)) {
+            let likesToCompare = data[key].likes;
+            if (likesToCompare === 'none') {
+              likesToCompare = {};
+            }
+            if (likes.hasOwnProperty(key) && likesToCompare.hasOwnProperty(username)) {
               matches[key] = Object.assign({}, data[key], {username: key})
             }
           }
@@ -116,7 +120,11 @@ export const swipeYes = (dispatch, username, liker, prospects) => {
       firebase.database().ref(`/users/${currentUser.uid}/${liker}/likes`)
         .once('value')
         .then(snapshot => {
-          const data = snapshot.val();
+          let data = snapshot.val();
+          console.log(data);
+          if (data === 'none') {
+            data = {};
+          }
           console.log(data);
           firebase.database().ref(`/users/${currentUser.uid}/${liker}/likes/${username}`)
           .set(prospects[username])
@@ -142,14 +150,18 @@ export const swipeNo = (dispatch, username, disliker, prospects) => {
       firebase.database().ref(`/users/${currentUser.uid}/${disliker}/dislikes`)
         .once('value')
         .then(snapshot => {
-          const data = snapshot.val();
+          let data = snapshot.val();
           console.log(data);
+          if (data === 'none') {
+            data = {};
+          }
           firebase.database().ref(`/users/${currentUser.uid}/${disliker}/dislikes/${username}`)
           .set(prospects[username])
           .then(() => {
+            console.log({[username]: prospects[username]});
             dispatch({
               type: 'swipe_yes',
-              dislikes: Object.assign({}, {[username]: prospects[username]}, data)
+              dislikes: Object.assign({}, data, {[username]: prospects[username]})
             })
           })
         });

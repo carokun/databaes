@@ -1,10 +1,11 @@
-const INITIAL_STATE = { username: '', password: '' }
+const INITIAL_STATE = { username: '', password: '', likes: {}, dislikes: {} }
 
 export default (state = INITIAL_STATE, action) =>
 {
   switch (action.type) {
     case 'user_login':
-      return action.userData;
+      console.log(action.userData);
+      return Object.assign({}, state, action.userData);
     case 'user_login_failed':
       return Object.assign({}, state, { username: '', password: '' });
     case 'login_username_change':
