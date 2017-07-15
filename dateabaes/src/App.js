@@ -97,6 +97,6 @@ const Navigator = StackNavigator({
       header: null
     }
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'Matches'});
 
 export default App;

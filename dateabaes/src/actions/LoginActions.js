@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export const loginUser = (dispatch, username, password, navigator) => {
+export const loginUser = (dispatch, username, password, navigation, findProspects) => {
   console.log('loginUser');
   return (dispatch) => {
     firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
@@ -16,7 +16,7 @@ export const loginUser = (dispatch, username, password, navigator) => {
             if (key === username && data[key].password === password) {
               found = true;
               dispatch({ type: 'user_login', userData: Object.assign({}, data[key], {username: key})});
-              navigator.navigate('SwipeScreen');
+              findProspects(username, password, data[key].likes, data[key].dislikes, data[key].matches, navigation);
               break;
             }
           }

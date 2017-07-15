@@ -241,5 +241,16 @@ export default StyleSheet.create({
         marginLeft: 30,
         justifyContent: 'center',
         alignItems: 'center',
-      }
+        margin: 10
+      },
+      modal: {
+        height: 350,
+        width: '90%',
+		borderRadius: 5,
+        backgroundColor: 'black',
+        marginLeft: 15,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+
     });

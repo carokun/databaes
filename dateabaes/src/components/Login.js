@@ -4,7 +4,7 @@ import styles from '../../public/css/styles.js';
 import { connect } from 'react-redux';
 
 import { loginUser, usernameChange, passwordChange } from '../actions/LoginActions'
-import { getMatches } from '../actions/MainActions';
+import { findProspects } from '../actions/MainActions';
 
 class Login extends Component {
   click(a) {
@@ -15,7 +15,7 @@ class Login extends Component {
   }
 
   loginButtonPress(username, password) {
-    this.props.getMatches(username, password, () => this.props.loginUser(username, password, this.props.navigation));
+    this.props.loginUser(username, password, this.props.navigation, (username, password, likes, dislikes, matches, navigation) => this.props.findProspects(username, password, likes, dislikes, matches, navigation))
   }
   render() {
     return (
@@ -68,8 +68,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loginUser: (username, password, navigation) => dispatch(loginUser(dispatch, username, password, navigation)),
-    getMatches: (username, password, loginUser) => dispatch(getMatches(dispatch, username, password, loginUser)),
+    loginUser: (username, password, navigation, findMatches) => dispatch(loginUser(dispatch, username, password, navigation, findMatches)),
+    findProspects: (username, password, likes, dislikes, matches, navigation) => dispatch(findProspects(dispatch, username, password, likes, dislikes, matches, navigation)),
     usernameChange: (username) => usernameChange(dispatch, username),
     passwordChange: (password) => passwordChange(dispatch, password)
   }

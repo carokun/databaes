@@ -52,11 +52,11 @@ class NoMoreCards extends Component {
   }
 }
 // YOU'LL NEED TO LOAD IN CARDS FROM THE DATABASE
-const Cards = [
-  {username: 'crestwood204', fname: 'Andrew', lname: 'Ong', language: 'JavaScript', gender: 'guy', years: '7', nerdyScore: '15', skillScore: '9', end: 'frontend'},
-  {username: 'carokun', fname: 'Caroline', lname: 'Okun', language: 'C++', gender: 'gal', years: '3', nerdyScore: '17', skillScore: '15', end: 'backend'},
-  {username: 'tifchang', fname: 'Tiffany', lname: 'Chang', language: 'OCaml', gender: 'gal', years: '2', nerdyScore: '9', skillScore: '2', end: 'frontend'}
-]
+// const Cards = [
+//   {username: 'crestwood204', fname: 'Andrew', lname: 'Ong', language: 'JavaScript', gender: 'guy', years: '7', nerdyScore: '15', skillScore: '9', end: 'frontend'},
+//   {username: 'carokun', fname: 'Caroline', lname: 'Okun', language: 'C++', gender: 'gal', years: '3', nerdyScore: '17', skillScore: '15', end: 'backend'},
+//   {username: 'tifchang', fname: 'Tiffany', lname: 'Chang', language: 'OCaml', gender: 'gal', years: '2', nerdyScore: '9', skillScore: '2', end: 'frontend'}
+// ]
 
 class SwipeScreen extends Component {
   constructor(props) {
@@ -70,12 +70,12 @@ class SwipeScreen extends Component {
   //   this.props.getUsers(this.props.username, this.props.password);
   // }
 
-  componentDidMount() {
-    const users = [];
-    for (var key in this.props.users) {
-      users.push(Object.assign({}, this.props.users[key], {username: key}))
+  componentWillMount() {
+    const prospects = [];
+    for (var key in this.props.prospects) {
+      prospects.push(Object.assign({}, this.props.prospects[key], {username: key}))
     }
-    this.setState({cards: users})
+    this.setState({cards: prospects})
   }
 
   handleYup (card) {
@@ -179,7 +179,7 @@ const mapStateToProps = (state) => {
   return {
     username: state.login.username,
     password: state.login.password,
-    users: state.main.users
+    prospects: state.main.prospects
   }
 };
 

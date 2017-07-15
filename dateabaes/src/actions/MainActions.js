@@ -1,6 +1,32 @@
 import firebase from 'firebase'
 
-export const getMatches = (dispatch, username, password, loginUser) => {
+export const findProspects = (dispatch, username, password, likes, dislikes, matches, navigation) => {
+  return (dispatch) => {
+    firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
+    .then((user) => {
+      const { currentUser } = firebase.auth();
+      firebase.database().ref(`/users/${currentUser.uid}`)
+        .on('value', snapshot => {
+          const data = snapshot.val();
+          console.log(data);
+          let prospects = {};
+          for(var key in data) {
+            // console.log(data[key][Object.keys(data[key])[0]].password);
+            if (key !== username) {
+              prospects[key] = Object.assign({}, data[key], {username: key})
+            }
+          }
+          dispatch({type: 'prospects_loaded', prospects})
+          navigation.navigate('SwipeScreen');
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  };
+};
+
+export const getUsers = (dispatch, username, password, loginUser) => {
   return (dispatch) => {
     firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
     .then((user) => {
