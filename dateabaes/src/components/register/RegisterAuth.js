@@ -19,6 +19,8 @@ class RegisterAuth extends React.Component {
       <Text style={styles.questionText1}>
         Github Username</Text>
       <TextInput blurOnSubmit={true}
+        autoCapitalize="none"
+        autoCorrect={false}
       onChangeText={(username) => this.props.usernameChange(username)}
       maxLength={15} placeholder="~username" style={styles.textInput}
       editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
@@ -26,6 +28,8 @@ class RegisterAuth extends React.Component {
       <Text style={styles.questionText1}>
         Password</Text>
       <TextInput blurOnSubmit={true}
+        autoCapitalize="none"
+        autoCorrect={false}
       onChangeText={(password) => this.props.passwordChange(password)}
       maxLength={15} secureTextEntry={true} placeholder="~bonus points of you use ASCII" style={styles.textInput}
       editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
@@ -33,6 +37,8 @@ class RegisterAuth extends React.Component {
       <Text style={styles.questionText1}>
         First Name</Text>
       <TextInput blurOnSubmit={true}
+        autoCapitalize="none"
+        autoCorrect={false}
       onChangeText={(fname) => this.props.fnameChange(fname)}
       maxLength={15} style={styles.textInput}
       editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
@@ -40,6 +46,8 @@ class RegisterAuth extends React.Component {
       <Text style={styles.questionText1}>
         Last Name</Text>
       <TextInput blurOnSubmit={true}
+        autoCapitalize="none"
+        autoCorrect={false}
       onChangeText={(lname) => this.props.lnameChange(lname)}
       maxLength={15} style={styles.textInput}
       editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>

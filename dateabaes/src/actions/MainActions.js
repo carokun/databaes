@@ -15,7 +15,13 @@ export const findProspects = (dispatch, username, password, likes, dislikes, mat
           for(var key in data) {
             users[key] = Object.assign({}, data[key], {username: key})
             // console.log(data[key][Object.keys(data[key])[0]].password);
-            if (key !== username && !dislikes.hasOwnProperty(key) && !likes.hasOwnProperty(key) && !matches.hasOwnProperty(key)) {
+            if(dislikes === 'none' || !dislikes) {
+              dislikes = {};
+            }
+            if(likes === 'none' || !likes) {
+              likes = {};
+            }
+            if (key !== username && !dislikes.hasOwnProperty(key) && !likes.hasOwnProperty(key)) {
               prospects[key] = Object.assign({}, data[key], {username: key})
             }
           }
@@ -48,6 +54,9 @@ export const findMatches = (dispatch, username, likes, matches, users, navigatio
             let likesToCompare = data[key].likes;
             if (likesToCompare === 'none') {
               likesToCompare = {};
+            }
+            if (!likes) {
+              likes = {};
             }
             if (likes.hasOwnProperty(key) && likesToCompare.hasOwnProperty(username)) {
               matches[key] = Object.assign({}, data[key], {username: key})
