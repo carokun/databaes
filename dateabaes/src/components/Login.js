@@ -33,13 +33,13 @@ class Login extends Component {
           <TextInput blurOnSubmit={true}
             value={this.props.username}
             onChangeText={(username) => this.props.usernameChange(username)}
-            autoCapitalize="none" maxLength={20} placeholder="~plz use real github username" style={styles.textInputG}
+            autoCapitalize="none" maxLength={20} placeholder="~eat_sleep_code" style={styles.textInputG}
             editable={true} placeholderTextColor={'#9B9B9B'} keyboardAppearance='dark' selectionColor={'#F1A227'}/>
         <Text style={styles.questionText1}>Password</Text>
           <TextInput blurOnSubmit={true}
             value={this.props.password}
             onChangeText={(password) => this.props.passwordChange(password)}
-            autoCapitalize="none" secureTextEntry={true} placeholder="~important!" style={styles.textInputG}
+            autoCapitalize="none" secureTextEntry={true} placeholder="~uuid()" style={styles.textInputG}
             editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#F1A227'}/>
         <View style={styles.btnContainer}>
           <TouchableOpacity style={styles.btnRegister}

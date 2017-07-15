@@ -28,12 +28,16 @@ export default (state = INITIAL_STATE, action) =>
       return Object.assign({}, state, { lname: action.lname });
     case 'question_answered':
       console.log(action);
+      console.log(action.questionNumber);
       if (questionAnswers[action.questionNumber - 1] === state.guessedAnswer) {
         action.navigation.navigate('RegisterQuizQuestion');
-        return Object.assign({}, state, { skillScore: action.questionNumber });
+        return Object.assign({}, state, { skillScore: action.questionNumber, guessedAnswer: '' });
+      } else if (action.questionNumber < 4) {
+        action.navigation.navigate('RegisterFuckedUp');
+        return Object.assign({}, state, { hasLost: true, guessedAnswer: '' });
       } else {
         action.navigation.navigate('RegisterAuth');
-        return Object.assign({}, state, { hasLost: true });
+        return Object.assign({}, state, { hasLost: true, guessedAnswer: ''});
       }
     case 'answer_change':
       return Object.assign({}, state, { guessedAnswer: action.guessedAnswer });
