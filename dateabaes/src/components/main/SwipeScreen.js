@@ -9,6 +9,10 @@ import { swipeYes, swipeNo, findMatches } from '../../actions/MainActions';
 
 let Card = React.createClass({
   render() {
+    // let image = 'jakeG.png';
+    // if (this.props.gender === 'male' || this.props.gender === 'Male') {
+    //   image = 'jake.png';
+    // }
     return (
       <View style={[styles.card]}>
         <Image

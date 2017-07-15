@@ -1,4 +1,4 @@
-const INITIAL_STATE = { username: '', password: '', fname: '', lname: '', skillScore: 0, hasLost: false, guessedAnswer: '' }
+const INITIAL_STATE = { username: '', password: '', fname: '', lname: '', skillScore: 8, hasLost: false, guessedAnswer: '' }
 
 const questionAnswers = [
       'src',
@@ -30,8 +30,13 @@ export default (state = INITIAL_STATE, action) =>
       console.log(action);
       console.log(action.questionNumber);
       if (questionAnswers[action.questionNumber - 1] === state.guessedAnswer) {
-        action.navigation.navigate('RegisterQuizQuestion');
-        return Object.assign({}, state, { skillScore: action.questionNumber, guessedAnswer: '' });
+        if (action.questionNumber === 10) {
+          action.navigation.navigate('RegisterEndQuiz');
+          return Object.assign({}, state, { skillScore: action.questionNumber, guessedAnswer: '' });
+        } else {
+          action.navigation.navigate('RegisterQuizQuestion');
+          return Object.assign({}, state, { skillScore: action.questionNumber, guessedAnswer: '' });
+        }
       } else if (action.questionNumber < 4) {
         action.navigation.navigate('RegisterFuckedUp');
         return Object.assign({}, state, { hasLost: true, guessedAnswer: '', skillScore: 0});

@@ -33,7 +33,7 @@ class RegisterEndQuiz extends Component {
             source={require('../../../public/assets/hand.png')}
           />
         </View>
-        <TouchableOpacity onPress={()=>this.props.navigation.navigate('RegisterQuizQuestion')} style={styles.beginQuiz}>
+        <TouchableOpacity onPress={()=>this.props.navigation.navigate('RegisterAuth')} style={styles.beginQuiz}>
           <Text style={styles.btnTextDark}>this.getBaes()</Text>
         </TouchableOpacity>
 

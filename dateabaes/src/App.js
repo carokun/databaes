@@ -16,6 +16,8 @@ import Messages from './components/main/Messages';
 import SwipeScreen from './components/main/SwipeScreen';
 import RegisterEndQuiz from './components/register/RegisterEndQuiz';
 import RegisterFuckedUp from './components/register/RegisterFuckedUp';
+import HomeScreen from './components/HomeScreen';
+
 
 class App extends Component {
 
@@ -103,7 +105,13 @@ const Navigator = StackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  HomeScreen: {
+    screen: HomeScreen,
+    navigationOptions: {
+      header: null
+    }
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'HomeScreen'});
 
 export default App;
