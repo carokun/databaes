@@ -18,10 +18,22 @@ class RegisterBasicQuestions extends Component {
   }
 
   onSubmit() {
-    const nerdyScore = 0;
-    this.props.registerUser(this.props.username || 'test', this.props.password || 'test', this.props.fname || 'test',
-      this.props.lname || 'test', this.state.language || 'test', this.state.end || 'test', this.state.gender || 'test',
-      this.state.years || 'test', this.props.skillScore || 'test', nerdyScore);
+    let nerdyScore = 1;
+    if(this.state.language === 'JavaScript' || this.state.language === 'C++') {
+      nerdyScore += 1;
+    } else if (this.state.language === 'OCaml' || this.state.language === 'Ruby') {
+      nerdyScore += 2;
+    } else if (this.state.language === 'Haskel') {
+      nerdyScore += 3;
+    }
+    if (this.state.end === 'backend') {
+      nerdyScore += 2;
+    }
+    nerdyScore += Math.floor(this.state.years / 3);
+    nerdyScore = Math.min(10, nerdyScore)
+    this.props.registerUser(this.props.username, this.props.password, this.props.fname,
+      this.props.lname, this.state.language, this.state.end, this.state.gender,
+      this.state.years, this.props.skillScore, nerdyScore);
     this.props.navigation.navigate('Login');
   }
 
@@ -36,12 +48,12 @@ class RegisterBasicQuestions extends Component {
           What's your love language?</Text>
         <View><RadioForm
           radio_props={[
-            {label: 'JavaScript', value: 2 },
-            {label: 'C++', value: 4 },
-            {label: 'OCaml', value: 5 },
-            {label: 'Python', value: 1 },
-            {label: 'Ruby', value: 8},
-            {label: 'Haskel', value: 9}
+            {label: 'JavaScript', value: 'JavaScript' },
+            {label: 'C++', value: 'C++' },
+            {label: 'OCaml', value: 'OCaml' },
+            {label: 'Python', value: 'Python' },
+            {label: 'Ruby', value: 'Ruby'},
+            {label: 'Haskel', value: 'Haskel'}
           ]}
           initial={0}
           formHorizontal={true}

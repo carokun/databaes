@@ -15,6 +15,7 @@ import Matches from './components/main/Matches';
 import Messages from './components/main/Messages';
 import SwipeScreen from './components/main/SwipeScreen';
 import RegisterEndQuiz from './components/register/RegisterEndQuiz';
+import RegisterFuckedUp from './components/register/RegisterFuckedUp';
 
 class App extends Component {
 
@@ -93,6 +94,12 @@ const Navigator = StackNavigator({
   },
   RegisterEndQuiz: {
     screen: RegisterEndQuiz,
+    navigationOptions: {
+      header: null
+    }
+  },
+  RegisterFuckedUp: {
+    screen: RegisterFuckedUp,
     navigationOptions: {
       header: null
     }

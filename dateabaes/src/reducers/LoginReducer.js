@@ -17,6 +17,8 @@ export default (state = INITIAL_STATE, action) =>
       return Object.assign({}, state, { dislikes: action.dislikes });
     case 'matches_found':
       return Object.assign({}, state, { matches: action.matches });
+    case 'update_messages':
+      return Object.assign({}, state, { messages: action.messages });
     default:
       return state;
   }

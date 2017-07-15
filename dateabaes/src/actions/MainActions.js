@@ -63,9 +63,10 @@ export const sendMessage = (dispatch, to, from, message) => {
     firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
     .then((user) => {
       const { currentUser } = firebase.auth();
-      firebase.database().ref(`/users/${currentUser.uid}/${from}/messages`)
+      firebase.database().ref(`/users/${currentUser.uid}/${to}/messages`)
         .push({to, from, message, date: (new Date()).toDateString()})
         .then(() => {
+          console.log('success');
           dispatch({
             type: 'message_sent'
           })
@@ -149,6 +150,30 @@ export const swipeNo = (dispatch, username, disliker, prospects) => {
               dislikes: Object.assign({}, {[username]: prospects[username]}, data)
             })
           })
+        });
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+  };
+};
+
+export const findMessages = (dispatch, username, users, navigation) => {
+  return (dispatch) => {
+    firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
+    .then((user) => {
+      const { currentUser } = firebase.auth();
+      console.log(username);
+      firebase.database().ref(`/users/${currentUser.uid}/${username}/messages`)
+        .once('value')
+        .then(snapshot => {
+          const data = snapshot.val();
+          console.log(data);
+          dispatch({
+            type: 'update_messages',
+            messages: data
+          })
+          navigation.navigate('Messages');
         });
     })
     .catch((err) => {
