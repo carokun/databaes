@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import firebase from 'firebase';
 import ReduxThunk from 'redux-thunk';
-import { Text } from 'react-native'
+import { StatusBar } from 'react-native'
 import reducers from './reducers';
 import { StackNavigator } from 'react-navigation';
 import Login from './components/Login';
@@ -31,6 +31,7 @@ class App extends Component {
   }
 
   render() {
+    StatusBar.setBarStyle('light-content', true)
     const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
     return (
@@ -89,13 +90,7 @@ const Navigator = StackNavigator({
     navigationOptions: {
       header: null
     }
-  },
-  SwipeScreenTest: {
-    screen: SwipeScreenTest,
-    navigationOptions: {
-      header: null
-    }
   }
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'SwipeScreen'});
 
 export default App;

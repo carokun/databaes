@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export const registerUser = (dispatch, username, password, fname, lname) => {
+export const registerUser = (dispatch, username, password, fname, lname, language, end, gender, years, skillScore, nerdyScore) => {
   console.log('here');
   return (dispatch) => {
     console.log('here2');
@@ -8,13 +8,17 @@ export const registerUser = (dispatch, username, password, fname, lname) => {
     .then((user) => {
       const { currentUser } = firebase.auth();
       firebase.database().ref(`users/${currentUser.uid}/user`)
-        .push({ [username]: {password, fname, lname} })
+        .push({ [username]: {password, fname, lname, language, end, gender, years, skillScore, nerdyScore} })
         .then(() => {
           console.log('success');
           dispatch({
             type: 'register_user',
-            username,
-            password
+            language,
+            end,
+            gender,
+            years,
+            skillScore,
+            nerdyScore
           })
         })
       console.log(currentUser);
@@ -50,5 +54,21 @@ export const lnameChange = (dispatch, lname) => {
   return dispatch({
     type: 'lname_change',
     lname
+  });
+};
+
+export const questionAnswered = (dispatch, questionNumber, guessedAnswer, navigation) => {
+  return dispatch({
+    type: 'question_answered',
+    guessedAnswer,
+    questionNumber,
+    navigation
+  });
+};
+
+export const answerChanged = (dispatch, guessedAnswer) => {
+  return dispatch({
+    type: 'answer_change',
+    guessedAnswer
   });
 };

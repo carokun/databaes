@@ -8,6 +8,11 @@ import { registerUser, usernameChange, passwordChange, fnameChange, lnameChange 
 
 class RegisterAuth extends React.Component {
 
+  onPress() {
+    // this.props.registerUser(this.props.username, this.props.password, this.props.fname, this.props.lname);
+    this.props.navigation.navigate('RegisterBasicQuestions');
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -39,7 +44,7 @@ class RegisterAuth extends React.Component {
       maxLength={15} style={styles.textInput}
       editable={true} placeholderTextColor={'#9B9B9B'} selectionColor={'#56C100'}/>
 
-      <TouchableOpacity style={styles.whiteBtn} onPress={() => this.props.registerUser(this.props.username, this.props.password, this.props.fname, this.props.lname)}>
+      <TouchableOpacity style={styles.whiteBtn} onPress={() => this.onPress()}>
         <Text style={styles.btnTextLight}>Next</Text>
       </TouchableOpacity>
       </View>

@@ -50,7 +50,7 @@ class Login extends Component {
             <Text style={styles.btnTextDark}>L091n</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.btnTroll} onPress={this.alert}>
-            <Text style={styles.btnTextDark}>686568</Text>
+            <Text style={styles.btnTextDark}>0x594F</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -60,8 +60,8 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    username: state.register.username,
-    password: state.register.password
+    username: state.login.username,
+    password: state.login.password
   }
 };
 

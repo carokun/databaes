@@ -1,6 +1,4 @@
 import { StyleSheet } from 'react-native';
-
-
 export default StyleSheet.create({
       container: {
         flex: 1,
@@ -162,4 +160,38 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
       },
+      rowAlign: {
+        margin: 40,
+        flexDirection: 'row',
+      },
+      terminalText: {
+        fontFamily: 'Courier',
+        color: '#066BFF',
+        fontSize: 15,
+      },
+      typeWriter: {
+        fontFamily: 'Courier',
+        color: '#fff',
+        fontSize: 15,
+      },
+      beginQuiz: {
+        width: 200,
+        height: 30,
+        backgroundColor: '#00B2F8',
+        marginTop: 20,
+        marginRight: 15,
+        marginLeft: 15,
+        borderRadius: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+      startQuizContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center'
+      },
+      mario: {
+        margin: 50,
+        height: 166,
+        width: 213
+      }
     });

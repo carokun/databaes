@@ -1,44 +1,58 @@
-// SwipeCards.js
 'use strict';
-
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image} from 'react-native';
+import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
+import style from '../../../public/css/styles.js';
 
 import SwipeCards from 'react-native-swipe-cards';
 
 let Card = React.createClass({
   render() {
     return (
-      <View style={[styles.card, {backgroundColor: this.props.backgroundColor}]}>
-        <Text>{this.props.text}</Text>
+      <View style={[styles.card]}>
+        <Image
+          style={[styles.image]}
+          source={require('../../../public/assets/jake.png')}
+        />
+        <View style={{flexDirection: 'row', marginLeft: 15, alignItems: 'center'}}>
+          <Text style={[styles.name]}>{this.props.fname}</Text>
+          <Text style={[styles.name]}>{this.props.lname}</Text>
+          <Text style={[styles.score]}>{this.props.score}</Text>
+        </View>
+        <Text style={[styles.username]}>@{this.props.username}</Text>
+        <Text style={[styles.userInfo, {marginTop: 15}]}>{this.props.language} type of {this.props.gender}</Text>
+        <Text style={[styles.userInfo]}>{this.props.years} years of experience</Text>
+        <Text style={[styles.userInfo]}>Prefers the {this.props.end}</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 15}}>
+          <Text style={[styles.userInfo]}>Nerd Level: </Text>
+          <Text style={[styles.score]}>{this.props.nerdyScore}</Text>
+          <Text style={[styles.userInfo]}>Skill Level: </Text>
+          <Text style={[styles.score]}>{this.props.skillScore}</Text>
+        </View>
       </View>
     )
   }
 })
-
 class NoMoreCards extends Component {
   constructor(props) {
     super(props);
   }
-
-  render() {
+ render() {
     return (
-      <View>
-        <Text style={styles.noMoreCardsText}>No more cards</Text>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Image
+          style={{margin: 50}}
+          source={require('../../../public/assets/mario.png')}
+        />
       </View>
     )
   }
 }
-
+// YOU'LL NEED TO LOAD IN CARDS FROM THE DATABASE
 const Cards = [
-  {text: 'Tomato', backgroundColor: 'red'},
-  {text: 'Aubergine', backgroundColor: 'purple'},
-  {text: 'Courgette', backgroundColor: 'green'},
-  {text: 'Blueberry', backgroundColor: 'blue'},
-  {text: 'Umm...', backgroundColor: 'cyan'},
-  {text: 'orange', backgroundColor: 'orange'},
+  {username: 'crestwood204', fname: 'Andrew', lname: 'Ong', language: 'JavaScript', gender: 'guy', years: '7', nerdyScore: '15', skillScore: '9', end: 'frontend'},
+  {username: 'carokun', fname: 'Caroline', lname: 'Okun', language: 'C++', gender: 'gal', years: '3', nerdyScore: '17', skillScore: '15', end: 'backend'},
+  {username: 'tifchang', fname: 'Tiffany', lname: 'Chang', language: 'OCaml', gender: 'gal', years: '2', nerdyScore: '9', skillScore: '2', end: 'frontend'}
 ]
-
 export default React.createClass({
   getInitialState() {
     return {
@@ -55,6 +69,7 @@ export default React.createClass({
     console.log(`Maybe for ${card.text}`)
   },
   render() {
+    // StatusBar.setBarStyle('light-content', true)
     // If you want a stack of cards instead of one-per-one view, activate stack mode
     // stack={true}
     return (
@@ -63,8 +78,7 @@ export default React.createClass({
         // stack={true}
         renderCard={(cardData) => <Card {...cardData} />}
         renderNoMoreCards={() => <NoMoreCards />}
-
-        handleYup={this.handleYup}
+       handleYup={this.handleYup}
         handleNope={this.handleNope}
         handleMaybe={this.handleMaybe}
         hasMaybeAction
@@ -75,13 +89,48 @@ export default React.createClass({
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-    height: 300,
+    // alignItems: 'center',
+    width: 280,
+    height: 450,
+    borderRadius: 3,
+    backgroundColor: '#EEEEEE'
+  },
+  name: {
+    fontFamily: 'Courier',
+    fontSize: 15,
+    marginRight: 5,
+    color: '#246FFF'
+  },
+  username: {
+    fontFamily: 'Courier',
+    color: '#5c88db',
+    fontSize: 13,
+    marginLeft: 15,
+    marginTop: 5
   },
   noMoreCardsText: {
     fontSize: 22,
+  },
+  userInfo: {
+    fontFamily: 'Courier',
+    color: '#4A4A4A',
+    fontSize: 13,
+    marginLeft: 15,
+    marginTop: 5
+  },
+  image: {
+    borderTopLeftRadius: 3,
+    borderTopRightRadius: 3,
+    width: 280,
+    backgroundColor: 'red',
+    height: 250,
+    marginBottom: 20
+  },
+  score: {
+    marginTop: 5,
+    fontFamily: 'Courier',
+    color: '#FC0044',
+    fontSize: 13,
   }
 })
