@@ -1,6 +1,17 @@
 const INITIAL_STATE = { username: '', password: '', fname: '', lname: '', skillScore: 0, hasLost: false, guessedAnswer: '' }
 
-const questionAnswers = new Array(10).fill('answer');
+const questionAnswers = [
+      'src',
+      'true',
+      'true',
+      'event.preventDefault()',
+      'A',
+      'B',
+      'callback hell',
+      'NaN',
+      'C',
+      '01000001 01100010 01101000 01101001'
+    ];
 
 export default (state = INITIAL_STATE, action) =>
 {

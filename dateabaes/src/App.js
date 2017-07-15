@@ -91,6 +91,6 @@ const Navigator = StackNavigator({
       header: null
     }
   }
-}, {initialRouteName: 'SwipeScreen'});
+}, {initialRouteName: 'RegisterQuizQuestion'});
 
 export default App;

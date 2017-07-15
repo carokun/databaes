@@ -5,7 +5,18 @@ import { connect } from 'react-redux';
 
 import { questionAnswered, answerChanged } from '../../actions/RegisterActions'
 
-const questions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const questions = [
+      `    <script\r\n\t\t ???=\"https://dateabaes.com"\r\n\t ></script>\r\n\r\n    ??? = YOUR_ANSWER\r\n`,
+      `    const myEmptyArray = [];\r\n\r\n    (myEmptyArray) === YOUR_ANSWER\r\n`,
+      `    var man = [1];\r\n    var woman = [2];\r\n\r\n    (arr1.splice == arr2.splice)\r\n    === YOUR_ANSWER\r\n`,
+      `    Stop the button’s default behaviour!\r\n\r\n    $('#button').on('click', event => {\r\n      ???\r\n    });\r\n`,
+      `    app.get('/', (req, res, next) => {\r\n      req.test = true;\r\n      next();\r\n    });\r\n\r\n    app.get('/', (req, res) => {\r\n      if (req.test) {\r\n        res.send('A');\r\n      } else\r\n        res.send('B');\r\n      }\r\n    });\r\n\r\n    app.get('/', (req, res) => {\r\n      res.send('C');\r\n    });\r\n`,
+      `    which option is not vulnerable to XSS (Cross Side Scripting)?\r\n\r\n    A: {{myFile.hbs}}\r\n    B: {{{myOtherFile.hbs}}}\r\n`,
+      `    what is the following known as?\r\n\r\n    $.ajax(\"https://horizons-json-cors.s3.amazonaws.com/start.json\", {\r\n      success: function(resp) {\r\n        $.ajax(resp.nextURL, {\r\n          success: function(resp) {\r\n            $.ajax(resp.nextURL, {\r\n              success: function(resp) {\r\n                console.log('Done', resp);\r\n              }\r\n            });\r\n          }\r\n        });\r\n      }\r\n    });\r\n`,
+      `    compute the following:\r\n\r\n    const f = () => (10);\r\n    const g = () => {10};\r\n\r\n    const answer = f() - g();\r\n`,
+      `    fix the following code to calculate the cost of buying one of each item on the menu!\r\n\r\n    const theMenu = [\r\n      { item: \"hot dog\", seller: \"Average Joe's\", price: 3 },\r\n      { item: \"pizza\", seller: \"The Market\", price: 6 },\r\n      { item: \"ice cream\", seller: \"Winterfell\", price: 10 }\r\n    ]\r\n\r\n    const sum = theMenu.reduce(function(a, b) {\r\n      return ?;\r\n    }, 0);\r\n\r\n    A: a + b\r\n    B: a.price + b.price\r\n    C: a + b.price\r\n    D: None of the Above\r\n`,
+      `    01100010 01101001 01100111 01100111\r\n01100101 01110011 01110100 00100000\r\n01100111 01110101 01111001 00100000\r\n01100001 01110100 00100000 01001000\r\n01101111 01110010 01101001 01111010\r\n01101111 01101110 01110011 00111111\r\n`
+    ]
 
 class RegisterQuizQuestion extends Component {
 
