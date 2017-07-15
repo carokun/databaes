@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image, StatusBar} from 'react-native';
+import {StyleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import style from '../../../public/css/styles.js';
 
 import SwipeCards from 'react-native-swipe-cards';
@@ -32,10 +32,12 @@ let Card = React.createClass({
     )
   }
 })
+
 class NoMoreCards extends Component {
   constructor(props) {
     super(props);
   }
+
  render() {
     return (
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -53,6 +55,7 @@ const Cards = [
   {username: 'carokun', fname: 'Caroline', lname: 'Okun', language: 'C++', gender: 'gal', years: '3', nerdyScore: '17', skillScore: '15', end: 'backend'},
   {username: 'tifchang', fname: 'Tiffany', lname: 'Chang', language: 'OCaml', gender: 'gal', years: '2', nerdyScore: '9', skillScore: '2', end: 'frontend'}
 ]
+
 export default React.createClass({
   getInitialState() {
     return {
@@ -69,20 +72,31 @@ export default React.createClass({
     console.log(`Maybe for ${card.text}`)
   },
   render() {
-    // StatusBar.setBarStyle('light-content', true)
     // If you want a stack of cards instead of one-per-one view, activate stack mode
     // stack={true}
     return (
-      <SwipeCards
-        cards={this.state.cards}
-        // stack={true}
-        renderCard={(cardData) => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards />}
-       handleYup={this.handleYup}
-        handleNope={this.handleNope}
-        handleMaybe={this.handleMaybe}
-        hasMaybeAction
-      />
+      <View style={{flex: 1,backgroundColor: '#1F1F1F',justifyContent: 'center'}}>
+          <TouchableOpacity>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={[styles.baeList]}>my baeList</Text>
+              <Image
+                style={[styles.heart]}
+                source={require('../../../public/assets/heart.png')}
+              />
+            </View>
+          </TouchableOpacity>
+        <SwipeCards
+          cards={this.state.cards}
+          // stack={true}
+          renderCard={(cardData) => <Card {...cardData} />}
+          renderNoMoreCards={() => <NoMoreCards />}
+
+         handleYup={this.handleYup}
+          handleNope={this.handleNope}
+          handleMaybe={this.handleMaybe}
+          hasMaybeAction
+        />
+      </View>
     )
   }
 })
@@ -132,5 +146,18 @@ const styles = StyleSheet.create({
     fontFamily: 'Courier',
     color: '#FC0044',
     fontSize: 13,
+  },
+  baeList: {
+    color: '#EEEEEE',
+    fontFamily: 'Courier',
+    fontSize: 20,
+    marginTop: 40,
+    marginLeft: '30%'
+  },
+  heart: {
+    marginLeft: 10,
+    height: 50,
+    width: 50,
+    marginTop: 40,
   }
 })
