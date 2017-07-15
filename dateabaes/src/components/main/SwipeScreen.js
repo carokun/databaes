@@ -5,7 +5,7 @@ import style from '../../../public/css/styles.js';
 import { connect } from 'react-redux';
 
 import SwipeCards from 'react-native-swipe-cards';
-import { getUsers, swipeYes, swipeNo } from '../../actions/MainActions';
+import { swipeYes, swipeNo, findMatches } from '../../actions/MainActions';
 
 let Card = React.createClass({
   render() {
@@ -79,11 +79,11 @@ class SwipeScreen extends Component {
   }
 
   handleYup (card) {
-    this.props.swipeYes(card.username, this.props.username)
+    this.props.swipeYes(card.username, this.props.username, this.props.prospects)
     console.log(`Yup for ${card.username}`)
   }
   handleNope (card) {
-    this.props.swipeNo(card.username, this.props.username)
+    this.props.swipeNo(card.username, this.props.username, this.props.prospects)
     console.log(`Nope for ${card.username}`)
   }
   render() {
@@ -91,7 +91,7 @@ class SwipeScreen extends Component {
     // stack={true}
     return (
       <View style={{flex: 1,backgroundColor: '#1F1F1F',justifyContent: 'center'}}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Matches')}>
+          <TouchableOpacity onPress={() => this.props.findMatches(this.props.username, this.props.likes, this.props.matches, this.props.users, this.props.navigation)}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={[styles.baeList]}>my baeList</Text>
               <Image
@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
   },
   heart: {
     marginLeft: 10,
-    height: 50,
-    width: 50,
+    height: 30,
+    width: 30,
     marginTop: 40,
   }
 })
@@ -179,15 +179,18 @@ const mapStateToProps = (state) => {
   return {
     username: state.login.username,
     password: state.login.password,
-    prospects: state.main.prospects
+    prospects: state.main.prospects,
+    likes: state.login.likes,
+    matches: state.login.matches,
+    users: state.main.users
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUsers: (username, password, setUsers) => dispatch(getUsers(dispatch, username, password, setUsers)),
-    swipeYes: (username, liker) => dispatch(swipeYes(dispatch, username, liker)),
-    swipeNo: (username, disliker) => dispatch(swipeNo(dispatch, username, disliker))
+    swipeYes: (username, liker, prospects) => dispatch(swipeYes(dispatch, username, liker, prospects)),
+    swipeNo: (username, disliker, prospects) => dispatch(swipeNo(dispatch, username, disliker, prospects)),
+    findMatches: (username, likes, matches, users, navigation) => dispatch(findMatches(dispatch, username, likes, matches, users, navigation))
   }
 };
 

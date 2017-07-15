@@ -2,7 +2,6 @@ const INITIAL_STATE = { username: '', password: '' }
 
 export default (state = INITIAL_STATE, action) =>
 {
-  console.log('loginType', action.type);
   switch (action.type) {
     case 'user_login':
       return action.userData;
@@ -12,6 +11,12 @@ export default (state = INITIAL_STATE, action) =>
       return Object.assign({}, state, { username: action.username });
     case 'login_password_change':
       return Object.assign({}, state, { password: action.password })
+    case 'swipe_yes':
+      return Object.assign({}, state, { likes: action.likes });
+    case 'swipe_no':
+      return Object.assign({}, state, { dislikes: action.dislikes });
+    case 'matches_found':
+      return Object.assign({}, state, { matches: action.matches });
     default:
       return state;
   }

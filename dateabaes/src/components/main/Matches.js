@@ -2,6 +2,9 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, ListView, TouchableHighlight } from 'react-native'
 import styles from '../../../public/css/styles.js';
 import Modal from 'react-native-modal'
+import { connect } from 'react-redux';
+
+import { sendMessage } from '../../actions/MainActions';
 
 const matches = [
   {username: 'crestwood204', fname: 'Andrew', lname: 'Ong', language: 'JavaScript', gender: 'guy', years: '7', nerdyScore: '15', skillScore: '9', end: 'frontend'},
@@ -29,10 +32,19 @@ class Matches extends React.Component {
     this.state = {
       dataSource: ds.cloneWithRows(matches),
       isModalVisible: false,
+      currentUser: ''
     };
   }
-  showModal() {
-    this.setState({ isModalVisible: true })
+  componentWillMount() {
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    const matches = [];
+    console.log(this.props.matches);
+    const keys = Object.keys(this.props.matches);
+    keys.map(() => matches.push(this.props.matches[keys]))
+    this.setState({dataSource: ds.cloneWithRows(matches)})
+  }
+  showModal(username) {
+    this.setState({ isModalVisible: true, currentUser: username })
   }
 
   hideModal() {
@@ -40,32 +52,38 @@ class Matches extends React.Component {
   }
   sendDirty() {
     // this should say "You sent: (the pickup line here)"
-    alert('You sent: DIRTY PICKUP LINE.')
+    this.props.sendMessage(this.state.currentUser, this.props.username, 'sum messeg')
+    this.setState({isModalVisible: false});
   }
   sendCute() {
     // this should say "You sent: (the pickup line here)"
-    alert('You sent: CUTE PICKUP LINE.')
+    this.props.sendMessage(this.state.currentUser, this.props.username, 'sum messeg')
+    this.setState({isModalVisible: false});
   }
   sendClassy() {
     // this should say "You sent: (the pickup line here)"
-    alert('You sent: CLASSY PICKUP LINE.')
+    this.props.sendMessage(this.state.currentUser, this.props.username, 'sum messeg')
+    this.setState({isModalVisible: false});
   }
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <Text style={styles.baeList}>this.getMoreBaes()</Text>
-            <Image
-              style={styles.heart}
-              source={require('../../../public/assets/heart.png')}
-            />
-          </View>
-        </TouchableOpacity>
+        <View style={[styles.startQuizContainer, {alignItems: 'center'}]}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('SwipeScreen')}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={[styles.baeList, {fontSize: 20, marginLeft: 0, marginRight: 30, marginBottom: 40}]}>new Baes() 💜</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Messages')}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={[styles.baeList, {fontSize: 20, marginLeft: 0, marginBottom: 40}]}>getMsgs() 📩</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
           <ListView dataSource={this.state.dataSource}
           renderRow={(match) =>
             <MatchCard fname={match.fname} lname={match.lname} username={match.username}
-            skillScore={match.skillScore} nerdyScore={match.nerdyScore} showModal={this.showModal.bind(this)}
+            skillScore={match.skillScore} nerdyScore={match.nerdyScore} showModal={this.showModal.bind(this, match.username)}
           />
           }/>
           {/* MODAL */}
@@ -98,4 +116,17 @@ class Matches extends React.Component {
   }
 };
 
-export default Matches;
+const mapStateToProps = (state) => {
+  return {
+    matches: state.login.matches,
+    username: state.login.username
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: (to, from, message) => dispatch(sendMessage(dispatch, to, from, message))
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Matches);

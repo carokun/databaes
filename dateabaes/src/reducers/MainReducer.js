@@ -7,10 +7,6 @@ export default (state = INITIAL_STATE, action) =>
       return Object.assign({}, state, { users: action.users });
     case 'prospects_loaded':
       return Object.assign({}, state, { prospects: action.prospects });
-    case 'swipe_yes':
-      return state;
-    case 'swipe_no':
-      return state;
     default:
       return state;
   }

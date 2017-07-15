@@ -7,7 +7,8 @@ export const loginUser = (dispatch, username, password, navigation, findProspect
     .then((user) => {
       const { currentUser } = firebase.auth();
       firebase.database().ref(`/users/${currentUser.uid}`)
-        .on('value', snapshot => {
+        .once('value')
+        .then(snapshot => {
           const data = snapshot.val();
           console.log(data);
           let found = false;

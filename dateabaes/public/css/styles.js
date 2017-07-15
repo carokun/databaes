@@ -210,7 +210,8 @@ export default StyleSheet.create({
         color: '#EEEEEE',
         fontFamily: 'Courier',
         fontSize: 20,
-        marginTop: 40,
+        marginTop: 50,
+        marginBottom: 40,
         marginLeft: '15%'
       },
       heart: {
@@ -246,8 +247,8 @@ export default StyleSheet.create({
       modal: {
         height: 350,
         width: '90%',
-		borderRadius: 5,
         backgroundColor: 'black',
+        borderRadius: 5,
         marginLeft: 15,
         justifyContent: 'center',
         alignItems: 'center'
