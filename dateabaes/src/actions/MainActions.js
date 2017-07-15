@@ -43,6 +43,8 @@ export const findMatches = (dispatch, username, likes, matches, users, navigatio
           let matches = {};
           for(var key in data) {
             // console.log(data[key][Object.keys(data[key])[0]].password);
+            console.log(likes);
+            console.log(users[key].likes);
             if (likes.hasOwnProperty(key) && users[key].likes.hasOwnProperty(username)) {
               matches[key] = Object.assign({}, data[key], {username: key})
             }
