@@ -10,7 +10,7 @@ export const registerUser = (dispatch, username, password, fname, lname, languag
         .then(() => {
           console.log('success');
           dispatch({
-            type: 'register_user',
+            type: 'register_user'
           })
         })
     })

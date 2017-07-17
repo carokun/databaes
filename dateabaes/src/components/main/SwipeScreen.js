@@ -9,20 +9,21 @@ import { swipeYes, swipeNo, findMatches } from '../../actions/MainActions';
 
 let Card = React.createClass({
   render() {
-    // let image = 'jakeG.png';
+    // let image = ;
     // if (this.props.gender === 'male' || this.props.gender === 'Male') {
-    //   image = 'jake.png';
+    //   image = require(`../../../public/assets/jake.png`);
     // }
     return (
       <View style={[styles.card]}>
         <Image
+          source={(this.props.gender === 'gal')?(require(`../../../public/assets/jakeG.png`)):(require(`../../../public/assets/jake.png`))}
           style={[styles.image]}
-          source={require('../../../public/assets/jake.png')}
+
         />
         <View style={{flexDirection: 'row', marginLeft: 15, alignItems: 'center'}}>
           <Text style={[styles.name]}>{this.props.fname}</Text>
           <Text style={[styles.name]}>{this.props.lname}</Text>
-          <Text style={[styles.score]}>{this.props.score}</Text>
+          {/* <Text style={[styles.score]}>{this.props.skillScore}</Text> */}
         </View>
         <Text style={[styles.username]}>@{this.props.username}</Text>
         <Text style={[styles.userInfo, {marginTop: 15}]}>{this.props.language} type of {this.props.gender}</Text>
@@ -70,9 +71,6 @@ class SwipeScreen extends Component {
     }
   }
 
-  // componentWillMount() {
-  //   this.props.getUsers(this.props.username, this.props.password);
-  // }
 
   componentWillMount() {
     const prospects = [];

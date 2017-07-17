@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Picker, Slider, TouchableOpacity, TextInput, Image } from 'react-native';
 import styles from '../../public/css/styles.js';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import { loginUser, usernameChange, passwordChange } from '../actions/LoginActions'
 import { findProspects } from '../actions/MainActions';
 
 class Login extends Component {
+  // componentWillMount() {
+  //   firebase.auth().signInWithEmailAndPassword('email@gmail2.com', 'password2')
+  //   .then((user) => {
+  //     const { currentUser } = firebase.auth();
+  //     firebase.database().ref(`/users/${currentUser.uid}`).remove();
+  //   })
+  // }
+
   click(a) {
     console.log(a);
   }

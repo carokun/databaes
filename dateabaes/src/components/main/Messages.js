@@ -3,6 +3,9 @@ import { View, Text, TouchableOpacity, Image, ListView } from 'react-native'
 import styles from '../../../public/css/styles.js';
 import { connect } from 'react-redux';
 
+import { findProspects } from '../../actions/MainActions';
+
+
 // PROXY DATA
 // const messages = [
 //   {from: 'crestwood204', to: 'carokun', message: 'Your eyes are far more gorgeous than any source code I have ever seen.', date: new Date().toDateString()},
@@ -50,7 +53,7 @@ class Messages extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('SwipeScreen')}>
+        <TouchableOpacity onPress={() => this.props.findProspects(this.props.username, this.props.password, this.props.likes, this.props.dislikes, this.props.matches, this.props.navigation)}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={[styles.baeList, {marginLeft: '25%'}]}>Back to myBaes</Text>
             <Image
@@ -73,12 +76,19 @@ class Messages extends React.Component {
 const mapStateToProps = (state) => {
   return {
     messages: state.login.messages,
-    username: state.login.username
+    username: state.login.username,
+    matches: state.login.matches,
+    users: state.main.users,
+    likes: state.login.likes,
+    dislikes: state.login.dislikes,
+    password: state.login.password
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    findProspects: (username, password, likes, dislikes, matches, navigation) => dispatch(findProspects(dispatch, username, password, likes, dislikes, matches, navigation))
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);

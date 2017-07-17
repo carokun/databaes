@@ -188,8 +188,7 @@ export const findMessages = (dispatch, username, users, navigation) => {
       const { currentUser } = firebase.auth();
       console.log(username);
       firebase.database().ref(`/users/${currentUser.uid}/${username}/messages`)
-        .once('value')
-        .then(snapshot => {
+        .on('value', snapshot => {
           const data = snapshot.val();
           console.log(data);
           dispatch({

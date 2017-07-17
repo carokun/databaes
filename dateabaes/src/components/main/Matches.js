@@ -4,7 +4,7 @@ import styles from '../../../public/css/styles.js';
 import Modal from 'react-native-modal'
 import { connect } from 'react-redux';
 
-import { sendMessage, findMessages } from '../../actions/MainActions';
+import { sendMessage, findMessages, findProspects } from '../../actions/MainActions';
 
 // const matches = [
 //   {username: 'crestwood204', fname: 'Andrew', lname: 'Ong', language: 'JavaScript', gender: 'guy', years: '7', nerdyScore: '15', skillScore: '9', end: 'frontend'},
@@ -142,7 +142,7 @@ class Matches extends React.Component {
     return (
       <View style={styles.container}>
         <View style={[styles.startQuizContainer, {alignItems: 'center'}]}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('SwipeScreen')}>
+          <TouchableOpacity onPress={() => this.props.findProspects(this.props.username, this.props.password, this.props.likes, this.props.dislikes, this.props.matches, this.props.navigation)}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={[styles.baeList, {fontSize: 20, marginLeft: 0, marginRight: 30, marginBottom: 40}]}>new Baes() 💜</Text>
             </View>
@@ -193,14 +193,18 @@ const mapStateToProps = (state) => {
   return {
     matches: state.login.matches,
     username: state.login.username,
-    users: state.main.users
+    users: state.main.users,
+    likes: state.login.likes,
+    dislikes: state.login.dislikes,
+    password: state.login.password
   }
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (to, from, message) => dispatch(sendMessage(dispatch, to, from, message)),
-    findMessages: (username, users, navigation) => dispatch(findMessages(dispatch, username, users, navigation))
+    findMessages: (username, users, navigation) => dispatch(findMessages(dispatch, username, users, navigation)),
+    findProspects: (username, password, likes, dislikes, matches, navigation) => dispatch(findProspects(dispatch, username, password, likes, dislikes, matches, navigation))
   }
 };
 
